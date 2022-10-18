@@ -58,7 +58,7 @@ class _CardPageState extends State<CardPage> {
               }
               if (state is CardLoadedState) {
                 return ListView.builder(
-                    itemCount: state.loadedCard?.length,
+                    itemCount: state.loadedCard?.articles!.length,
                     itemBuilder: ((context, index) => Padding(
                           padding: const EdgeInsets.only(top: 20, bottom: 20),
                           child: GestureDetector(
@@ -72,9 +72,10 @@ class _CardPageState extends State<CardPage> {
                                   ));
                             },
                             child: CardView(
-                              number: state.loadedCard?[index].charId,
-                              title: state.loadedCard?[index].name,
-                              text: state.loadedCard?[index].nickname,
+                              number: index + 1,
+                              title: state.loadedCard!.articles![index].title!,
+                              text: state
+                                  .loadedCard!.articles![index].description!,
                             ),
                           ),
                         )));

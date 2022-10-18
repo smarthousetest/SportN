@@ -10,7 +10,7 @@ class CardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130.0,
+      height: 160.0,
       margin: const EdgeInsets.only(left: 20.0, right: 21.0),
       decoration: BoxDecoration(
         boxShadow: [
@@ -63,7 +63,7 @@ class CardView extends StatelessWidget {
                       child: Text(
                         "$title",
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 13,
                             fontWeight: FontWeight.w500,
                             color: Colors.white),
                       ),

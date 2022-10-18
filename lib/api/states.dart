@@ -1,3 +1,5 @@
+import 'package:fap/api/api.dart';
+
 abstract class CardState {}
 
 class CardEmptyState extends CardState {}
@@ -5,7 +7,7 @@ class CardEmptyState extends CardState {}
 class CardLoadingState extends CardState {}
 
 class CardLoadedState extends CardState {
-  List<dynamic>? loadedCard;
+  AuthModel? loadedCard;
   CardLoadedState({this.loadedCard}) {}
 }
 

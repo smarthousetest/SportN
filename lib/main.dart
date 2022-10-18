@@ -2,6 +2,7 @@ import 'package:fap/api/api_cubit.dart';
 import 'package:fap/auth.dart/auth_page.dart';
 import 'package:fap/cards.dart/card_page.dart';
 import 'package:fap/info.dart/info_page.dart';
+import 'package:fap/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fap/api/locator.dart' as servic;
@@ -23,7 +24,7 @@ class TodoApp extends StatelessWidget {
         ],
         child: new MaterialApp(
           title: 'Todo list',
-          home: AuthPage(),
+          home: Splash(),
           routes: <String, WidgetBuilder>{
             '/a': (BuildContext context) => CardPage(),
             // '/b': (BuildContext context) => InfoPage(),

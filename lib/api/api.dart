@@ -1,106 +1,95 @@
-// To parse this JSON data, do
-//
-//     final authModel = authModelFromJson(jsonString);
-
-import 'dart:convert';
-
-List<AuthModel> authModelFromJson(String str) => List<AuthModel>.from(json.decode(str).map((x) => AuthModel.fromJson(x)));
-
-String authModelToJson(List<AuthModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class AuthModel {
-    AuthModel({
-        this.charId,
-        this.name,
-        this.birthday,
-        this.occupation,
-        this.img,
-        this.status,
-        this.nickname,
-        this.appearance,
-        this.portrayed,
-        this.category,
-        this.betterCallSaulAppearance,
-    });
+  String? status;
+  int? totalResults;
+  List<Articles>? articles;
 
-    int? charId;
-    String? name;
-    Birthday? birthday;
-    List<String>? occupation;
-    String? img;
-    Status? status;
-    String? nickname;
-    List<int>? appearance;
-    String? portrayed;
-    Category? category;
-    List<int>? betterCallSaulAppearance;
+  AuthModel({this.status, this.totalResults, this.articles});
 
-    factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
-        charId: json["char_id"],
-        name: json["name"],
-        birthday: birthdayValues.map[json["birthday"]],
-        occupation: List<String>.from(json["occupation"].map((x) => x)),
-        img: json["img"],
-        status: statusValues.map[json["status"]],
-        nickname: json["nickname"],
-        appearance: List<int>.from(json["appearance"].map((x) => x)),
-        portrayed: json["portrayed"],
-        category: categoryValues.map[json["category"]],
-        betterCallSaulAppearance: List<int>.from(json["better_call_saul_appearance"].map((x) => x)),
-    );
+  AuthModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    totalResults = json['totalResults'];
+    if (json['articles'] != null) {
+      articles = [];
+      json['articles'].forEach((v) {
+        articles?.add(new Articles.fromJson(v));
+      });
+    }
+  }
 
-    Map<String, dynamic> toJson() => {
-        "char_id": charId,
-        "name": name,
-        "birthday": birthdayValues.reverse?[birthday],
-        "occupation": List<dynamic>.from(occupation!.map((x) => x)),
-        "img": img,
-        "status": statusValues.reverse?[status],
-        "nickname": nickname,
-        "appearance": List<dynamic>.from(appearance!.map((x) => x)),
-        "portrayed": portrayed,
-        "category": categoryValues.reverse?[category],
-        "better_call_saul_appearance": List<dynamic>.from(betterCallSaulAppearance!.map((x) => x)),
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['totalResults'] = this.totalResults;
+    if (this.articles != null) {
+      data['articles'] = this.articles!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-enum Birthday { THE_09071958, THE_09241984, THE_08111970, THE_07081993, UNKNOWN }
+class Articles {
+  Source? source;
+  String? author;
+  String? title;
+  String? description;
+  String? url;
+  String? urlToImage;
+  String? publishedAt;
+  String? content;
 
-final birthdayValues = EnumValues({
-    "07-08-1993": Birthday.THE_07081993,
-    "08-11-1970": Birthday.THE_08111970,
-    "09-07-1958": Birthday.THE_09071958,
-    "09-24-1984": Birthday.THE_09241984,
-    "Unknown": Birthday.UNKNOWN
-});
+  Articles(
+      {this.source,
+      this.author,
+      this.title,
+      this.description,
+      this.url,
+      this.urlToImage,
+      this.publishedAt,
+      this.content});
 
-enum Category { BREAKING_BAD, BREAKING_BAD_BETTER_CALL_SAUL, BETTER_CALL_SAUL }
+  Articles.fromJson(Map<String, dynamic> json) {
+    source =
+        json['source'] != null ? new Source.fromJson(json['source']) : null;
+    author = json['author'];
+    title = json['title'];
+    description = json['description'];
+    url = json['url'];
+    urlToImage = json['urlToImage'];
+    publishedAt = json['publishedAt'];
+    content = json['content'];
+  }
 
-final categoryValues = EnumValues({
-    "Better Call Saul": Category.BETTER_CALL_SAUL,
-    "Breaking Bad": Category.BREAKING_BAD,
-    "Breaking Bad, Better Call Saul": Category.BREAKING_BAD_BETTER_CALL_SAUL
-});
-
-enum Status { PRESUMED_DEAD, ALIVE, DECEASED, UNKNOWN }
-
-final statusValues = EnumValues({
-    "Alive": Status.ALIVE,
-    "Deceased": Status.DECEASED,
-    "Presumed dead": Status.PRESUMED_DEAD,
-    "Unknown": Status.UNKNOWN
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    Map<T, String>? reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String>? get reverse {
-        if (reverseMap == null) {
-            reverseMap = map.map((k, v) => new MapEntry(v, k));
-        }
-        return reverseMap;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.source != null) {
+      data['source'] = this.source!.toJson();
     }
+    data['author'] = this.author;
+    data['title'] = this.title;
+    data['description'] = this.description;
+    data['url'] = this.url;
+    data['urlToImage'] = this.urlToImage;
+    data['publishedAt'] = this.publishedAt;
+    data['content'] = this.content;
+    return data;
+  }
+}
+
+class Source {
+  String? id;
+  String? name;
+
+  Source({this.id, this.name});
+
+  Source.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    return data;
+  }
 }
