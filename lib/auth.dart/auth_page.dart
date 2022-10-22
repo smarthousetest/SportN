@@ -19,7 +19,7 @@ class _AuthPageState extends State<AuthPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "Авторизация",
+              "Authorization",
               style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w400,
@@ -34,13 +34,16 @@ class _AuthPageState extends State<AuthPage> {
                     child: TextFormField(
                       validator: ((value) {
                         if (value!.isEmpty) {
-                          return 'Введите логин';
+                          return 'Login';
+                        }
+                        if (!value.contains("@") && !value.contains(".")) {
+                          return "It's not Email, please check";
                         }
                       }),
                       style:
                           TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                       decoration: InputDecoration(
-                        hintText: "Логин",
+                        hintText: "E-mail",
                         hintStyle: TextStyle(color: Colors.white),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -59,13 +62,16 @@ class _AuthPageState extends State<AuthPage> {
                       obscureText: true,
                       validator: ((value) {
                         if (value!.isEmpty) {
-                          return 'Введите пароль';
+                          return 'Enter password';
+                        }
+                        if (value.length < 6) {
+                          return 'Not correct passsword, return please';
                         }
                       }),
                       style:
                           TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                       decoration: InputDecoration(
-                        hintText: "Пароль",
+                        hintText: "password",
                         hintStyle: TextStyle(color: Colors.white),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -97,7 +103,7 @@ class _AuthPageState extends State<AuthPage> {
                       ApiCubit().getConfig();
                     }
                   },
-                  child: Text("Войти")),
+                  child: Text("Enter")),
             )
           ],
         ),

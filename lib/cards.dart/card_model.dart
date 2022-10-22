@@ -10,8 +10,11 @@ class CardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160.0,
-      margin: const EdgeInsets.only(left: 20.0, right: 21.0),
+      height: 170.0,
+      margin: const EdgeInsets.only(
+        left: 20.0,
+        right: 21.0,
+      ),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -34,7 +37,7 @@ class CardView extends StatelessWidget {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(10.0),
             child: Text(
               "#$number",
               style: TextStyle(
@@ -50,42 +53,45 @@ class CardView extends StatelessWidget {
             indent: 20, //Spacing at the top of divider.
             endIndent: 20, //Spacing at the bottom of divider.
           ),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 270,
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "$title",
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
+          SizedBox(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 270,
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Text(
+                          "$title",
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10, right: 30, left: 10),
-                child: SizedBox(
-                  width: 250,
-                  height: 50,
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white),
-                  ),
+                  ],
                 ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 10, right: 30, left: 10, bottom: 10),
+                  child: SizedBox(
+                    width: 250,
+                    height: 50,
+                    child: Text(
+                      text,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                  ),
+                )
+              ],
+            ),
           )
         ],
       ),

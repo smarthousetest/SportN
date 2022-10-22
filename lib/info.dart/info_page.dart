@@ -6,9 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
-import 'package:link/link.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class InfoPage extends StatefulWidget {
   int index;
@@ -29,7 +26,7 @@ class _InfoPageState extends State<InfoPage> {
             Row(
               children: [
                 Text(
-                  "Выйти",
+                  "Quit",
                   style: TextStyle(color: Colors.black),
                 ),
                 IconButton(
@@ -50,7 +47,7 @@ class _InfoPageState extends State<InfoPage> {
             builder: (context, state) {
               if (state is CardErrorState) {
                 return Center(
-                  child: Text("Ошибка"),
+                  child: Text("Error"),
                 );
               }
               if (state is CardLoadingState) {
@@ -125,29 +122,6 @@ class _InfoPageState extends State<InfoPage> {
                                     fontSize: 13, fontWeight: FontWeight.w500),
                               )),
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 20, left: 20, bottom: 20),
-                            child: RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                  style: linkText,
-                                  text: "Link on photo",
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () async {
-                                      var url =
-                                          "${state.loadedCard!.articles![widget.index].urlToImage.toString()}";
-                                      if (await canLaunch(url)) {
-                                        await launch(url);
-                                      } else {
-                                        throw 'Could not launch $url';
-                                      }
-                                    }),
-                            ])),
-                          ),
-                        ),
                         Divider(
                           height: 30,
                           thickness: 0.7,
@@ -168,7 +142,7 @@ class _InfoPageState extends State<InfoPage> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text('Назад')),
+                                child: Text('Back')),
                           ),
                         )
                       ]),

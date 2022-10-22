@@ -1,4 +1,4 @@
-package com.example.fap
+package bestsliga.westins
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -27,7 +27,7 @@ class _CardPageState extends State<CardPage> {
               Row(
                 children: [
                   Text(
-                    "Выйти",
+                    "Quit",
                     style: TextStyle(color: Colors.black),
                   ),
                   IconButton(
@@ -48,7 +48,7 @@ class _CardPageState extends State<CardPage> {
             body: BlocBuilder<CardCubit, CardState>(builder: ((context, state) {
               if (state is CardErrorState) {
                 return Center(
-                  child: Text("Ошибка"),
+                  child: Text("Error"),
                 );
               }
               if (state is CardLoadingState) {
